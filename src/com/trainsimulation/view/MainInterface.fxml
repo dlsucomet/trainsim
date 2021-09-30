@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1800.0" style="-fx-background-color: #fcf7f8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.trainsimulation.controller.screen.MainScreenController">
+   <center>
+      <BorderPane fx:id="simulationArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <right>
+            <VBox alignment="CENTER" prefHeight="415.0" prefWidth="300.0" spacing="5.0" style="-fx-background-color: #00bcd4;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fx:id="trainSystemText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="No train systems loaded">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="trainsDeployedText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0 / 0 trains deployed" />
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="280.0">
+                     <children>
+                        <JFXButton fx:id="addTrainButton" buttonType="RAISED" disable="true" onAction="#addTrainAction" prefHeight="25.0" prefWidth="260.0" ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Insert train" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="280.0" spacing="20.0">
+                     <children>
+                        <JFXButton fx:id="editTrainButton" buttonType="RAISED" disable="true" onAction="#editTrainAction" prefHeight="25.0" prefWidth="116.0" ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Edit" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="markTrainButton" buttonType="RAISED" disable="true" onAction="#markAction" prefHeight="25.0" prefWidth="116.0" ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Mark" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="clearMarkButton" buttonType="RAISED" disable="true" layoutX="74.0" layoutY="18.0" onAction="#clearMarkAction" prefHeight="25.0" prefWidth="129.0" ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Clear mark" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TableView fx:id="activeTrainsTable" disable="true" prefHeight="270.0" prefWidth="280.0">
+                     <columns>
+                        <TableColumn fx:id="trainNumberColumn" prefWidth="27.333251953125" text="#" />
+                        <TableColumn fx:id="trainPassengersColumn" prefWidth="164.6666259765625" text="Passengers" />
+                        <TableColumn fx:id="trainStatusColumn" prefWidth="73.6666259765625" text="Status" />
+                        <TableColumn fx:id="trainVelocityColumn" prefWidth="27.333251953125" text="Velocity" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="30.0" prefHeight="40.0" prefWidth="280.0" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="284.0" spacing="20.0">
+                           <children>
+                              <Label fx:id="headwayLabel" disable="true" text="Headway (meters)" textFill="WHITE" />
+                              <JFXSlider fx:id="headwaySlider" blockIncrement="25.0" max="1000.0" min="100.0" snapToTicks="true" value="550.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="284.0" spacing="20.0">
+                     <children>
+                        <JFXCheckBox fx:id="signalCheckBox" text="Show signals" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </padding>
+            </VBox>
+         </right>
+         <center>
+            <JFXTabPane BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </center>
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="1300.0" spacing="20.0" style="-fx-background-color: #7fb069;" BorderPane.alignment="CENTER">
+         <children>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+               <buttons>
+                  <JFXButton fx:id="setupButton" buttonType="RAISED" onAction="#setupAction" ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Set up" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="startButton" buttonType="RAISED" disable="true" layoutX="285.0" layoutY="13.0" onAction="#startAction" ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Start" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="playPauseButton" buttonType="RAISED" disable="true" layoutX="370.0" layoutY="13.0" onAction="#playAction" ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Play" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </buttons>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </ButtonBar>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="240.0" spacing="10.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Running time" />
+                        <Text fx:id="runningTimeText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="92.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Elapsed time" />
+                        <Text fx:id="elapsedTimeText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0 s">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="305.0" layoutY="20.0" prefHeight="50.0" prefWidth="350.0" spacing="20.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Slow">
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </Text>
+                  <VBox alignment="CENTER" layoutX="92.0" layoutY="10.0" prefHeight="50.0" prefWidth="202.0">
+                     <children>
+                        <Label fx:id="simulationSpeedLabel" disable="true" prefHeight="34.0" prefWidth="161.0" text="Simulation speed (seconds)" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                        <JFXSlider fx:id="simulationSpeedSlider" blockIncrement="30.0" disable="true" majorTickUnit="30.0" max="500.0" min="1.0" minorTickCount="30" snapToTicks="true" value="1.0" />
+                     </children>
+                  </VBox>
+                  <Text fill="WHITE" layoutX="206.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast">
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
+</BorderPane>

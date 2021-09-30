@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crowdsimulation.controller.controls.feature.main.MainScreenController">
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1100.0" spacing="10.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="800.0" spacing="10.0">
+                            <children>
+                                <Text fx:id="stationNameText" layoutX="544.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--">
+                                    <font>
+                                        <Font name="System Bold" size="20.0" />
+                                    </font>
+                                </Text>
+                                <Button fx:id="addFloorBelowButton" cancelButton="true" mnemonicParsing="false" onAction="#addFloorBelowAction" prefHeight="25.0" prefWidth="60.0" text="Add ⮟" />
+                                <Button fx:id="floorBelowButton" layoutX="107.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToFloorBelowAction" text="⮟" />
+                                <Text fx:id="floorNumberText" layoutX="639.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--" />
+                                <Button fx:id="deleteFloorButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteFloorAction" prefHeight="25.0" prefWidth="35.0">
+                                    <graphic>
+                                        <ImageView fx:id="deleteImageView" fitHeight="16.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@image/interface/delete.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="floorAboveButton" layoutX="257.0" layoutY="21.0" mnemonicParsing="false" onAction="#switchToFloorAboveAction" text="⮝" />
+                                <Button fx:id="addFloorAboveButton" cancelButton="true" mnemonicParsing="false" onAction="#addFloorAboveAction" prefHeight="25.0" prefWidth="60.0" text="Add ⮝" />
+                        <ToggleButton fx:id="peekFloorsButton" mnemonicParsing="false" onAction="#togglePeekAction" text="Peek at floors" />
+                            </children>
+                            <padding>
+                                <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+                            </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="506.0" spacing="200.0">
+                            <children>
+                                <Text fx:id="promptText" layoutX="544.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--" />
+                            </children>
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                        </HBox>
+                    </children>
+                </HBox>
+                <ScrollPane fx:id="scrollPane" focusTraversable="false" prefHeight="705.0" prefWidth="1230.0">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                    <content>
+                        <Group fx:id="canvasGroup">
+                            <children>
+                                <StackPane fx:id="interfaceStackPane" prefHeight="1000.0" prefWidth="2200.0">
+                                    <children>
+                                        <Canvas fx:id="backgroundCanvas" height="2000.0" width="4400.0" />
+                                        <Canvas fx:id="foregroundCanvas" height="2000.0" mouseTransparent="true" width="4400.0" />
+                                        <Canvas fx:id="markingsCanvas" height="2000.0" mouseTransparent="true" width="4400.0" />
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </Group>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </center>
+    <right>
+        <TabPane fx:id="sidebar" prefHeight="642.0" prefWidth="250.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Build">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="250.0" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="validateButton" mnemonicParsing="false" onAction="#validateStationAction" prefHeight="25.0" prefWidth="231.0" text="Validate the station layout" />
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="250.0" spacing="10.0">
+                                    <children>
+                                        <Label fx:id="buildModeLabel" text="Build mode:" />
+                                        <ChoiceBox fx:id="buildModeChoiceBox" prefHeight="25.0" prefWidth="156.0" />
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                    </padding>
+                                </HBox>
+                                <TabPane fx:id="buildTabPane" prefHeight="667.0" prefWidth="250.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
+                                    <tabs>
+                                        <Tab text="Entrances &amp; Exits">
+                                            <content>
+                                                <Accordion>
+                                                    <panes>
+                                                        <TitledPane animated="false" text="Station entrance/exit">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <VBox alignment="CENTER" prefHeight="295.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <CheckBox fx:id="stationGateEnableCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" selected="true" text="Enable station entrance/exit" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="174.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="stationGateModeLabel" text="Mode:" />
+                                                                                        <ChoiceBox fx:id="stationGateModeChoiceBox" prefHeight="25.0" prefWidth="156.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                            <HBox alignment="CENTER" prefHeight="130.0" prefWidth="199.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label fx:id="stationGateDirectionLabel" text="Spawns:" />
+                                                                  <ListView fx:id="stationGateDirectionListView" fixedCellSize="30.0" prefHeight="245.0" prefWidth="147.0" />
+                                                               </children>
+                                                            </HBox>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="183.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="stationGateSpawnLabel" text="Spawn frequency (%):" />
+                                                                                        <Spinner fx:id="stationGateSpawnSpinner" prefHeight="25.0" prefWidth="76.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Button fx:id="saveStationGateButton" cancelButton="true" mnemonicParsing="false" onAction="#saveAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Save" />
+                                                                                        <Button fx:id="deleteStationGateButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Delete" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                        <TitledPane animated="false" text="Security">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <VBox alignment="CENTER" prefHeight="140.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <CheckBox fx:id="securityEnableCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" selected="true" text="Enable security gate" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="167.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <CheckBox fx:id="securityBlockPassengerCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" text="Block passenger entry" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="183.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="securityIntervalLabel" text="Interval (s):" />
+                                                                                        <Spinner fx:id="securityIntervalSpinner" prefHeight="25.0" prefWidth="132.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Button fx:id="saveSecurityButton" cancelButton="true" mnemonicParsing="false" onAction="#saveAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Save" />
+                                                                                        <Button fx:id="deleteSecurityButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Delete" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <Button fx:id="addFloorFieldsSecurityButton" cancelButton="true" layoutX="10.0" layoutY="99.0" mnemonicParsing="false" onAction="#addFloorFieldsAction" prefHeight="25.0" prefWidth="200.0" text="Add floor field" />
+                                                                                <Button fx:id="flipSecurityButton" cancelButton="true" mnemonicParsing="false" onAction="#flipAction" prefHeight="25.0" prefWidth="199.0" text="Rotate security" />
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                    </panes>
+                                                </Accordion>
+                                            </content>
+                                        </Tab>
+                                        <Tab text="Stairs &amp; Elevators">
+                                            <content>
+                                                <Accordion>
+                                                    <panes>
+                                                        <TitledPane animated="false" text="Stairs">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <Button fx:id="addStairButton" cancelButton="true" mnemonicParsing="false" onAction="#addPortalAction" prefHeight="25.0" prefWidth="100.0" text="Add" />
+                                                                                <Button fx:id="editStairButton" cancelButton="true" mnemonicParsing="false" onAction="#editPortalAction" prefHeight="25.0" prefWidth="100.0" text="Edit" />
+                                                                                <Button fx:id="deleteStairButton" cancelButton="true" mnemonicParsing="false" onAction="#deletePortalAction" prefHeight="25.0" prefWidth="100.0" text="Delete" />
+                                                                            </children>
+                                                                        </HBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                        <TitledPane animated="false" text="Escalator">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <Button fx:id="addEscalatorButton" cancelButton="true" mnemonicParsing="false" onAction="#addPortalAction" prefHeight="25.0" prefWidth="199.0" text="Add" />
+                                                                                <Button fx:id="editEscalatorButton" cancelButton="true" mnemonicParsing="false" onAction="#editPortalAction" prefHeight="25.0" prefWidth="199.0" text="Edit" />
+                                                                                <Button fx:id="deleteEscalatorButton" cancelButton="true" mnemonicParsing="false" onAction="#deletePortalAction" prefHeight="25.0" prefWidth="199.0" text="Delete" />
+                                                                            </children>
+                                                                        </HBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                        <TitledPane animated="false" text="Elevator">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <Button fx:id="addElevatorButton" cancelButton="true" mnemonicParsing="false" onAction="#addPortalAction" prefHeight="25.0" prefWidth="199.0" text="Add" />
+                                                                                <Button fx:id="editElevatorButton" cancelButton="true" mnemonicParsing="false" onAction="#editPortalAction" prefHeight="25.0" prefWidth="199.0" text="Edit" />
+                                                                                <Button fx:id="deleteElevatorButton" cancelButton="true" mnemonicParsing="false" onAction="#deletePortalAction" prefHeight="25.0" prefWidth="199.0" text="Delete" />
+                                                                            </children>
+                                                                        </HBox>
+                                                                        <VBox alignment="CENTER" prefHeight="35.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <Button fx:id="addFloorFieldsElevatorButton" cancelButton="true" mnemonicParsing="false" onAction="#addFloorFieldsAction" prefHeight="25.0" prefWidth="199.0" text="Add floor field" />
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                    </panes>
+                                                </Accordion>
+                                            </content>
+                                        </Tab>
+                                        <Tab text="Concourse Amenities">
+                                            <content>
+                                                <Accordion>
+                                                    <panes>
+                                                        <TitledPane animated="false" text="Ticket booth">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <VBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0" spacing="10.0">
+                                                                            <children>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <CheckBox fx:id="ticketBoothEnableCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" selected="true" text="Enable ticket booth" wrapText="true" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="ticketBoothModeLabel" prefHeight="17.0" prefWidth="100.0" text="Dispenses:" />
+                                                                                        <ChoiceBox fx:id="ticketBoothModeChoiceBox" prefHeight="25.0" prefWidth="176.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="242.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="ticketBoothIntervalLabel" prefHeight="17.0" prefWidth="128.0" text="Time to dispense (s):" />
+                                                                                        <Spinner fx:id="ticketBoothIntervalSpinner" prefHeight="25.0" prefWidth="63.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Button fx:id="saveTicketBoothButton" cancelButton="true" mnemonicParsing="false" onAction="#saveAmenityAction" prefHeight="25.0" prefWidth="199.0" text="Save" />
+                                                                                        <Button fx:id="deleteTicketBoothButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteAmenityAction" prefHeight="25.0" prefWidth="199.0" text="Delete" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <Button fx:id="addFloorFieldsTicketBoothButton" cancelButton="true" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" onAction="#addFloorFieldsAction" prefHeight="25.0" prefWidth="199.0" text="Add floor field" />
+                                                                                <Button fx:id="flipTicketBoothButton" cancelButton="true" mnemonicParsing="false" onAction="#flipAction" prefHeight="25.0" prefWidth="199.0" text="Toggle manual/automatic booth" />
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                        <TitledPane animated="false" text="Turnstile">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <VBox alignment="CENTER" prefHeight="396.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <CheckBox fx:id="turnstileEnableCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" selected="true" text="Enable turnstile" wrapText="true" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <CheckBox fx:id="turnstileBlockPassengerCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" text="Block passenger entry" wrapText="true" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="turnstileModeLabel" prefHeight="17.0" prefWidth="74.0" text="Mode:" />
+                                                                                        <ChoiceBox fx:id="turnstileModeChoiceBox" prefHeight="25.0" prefWidth="153.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                            <HBox alignment="CENTER" prefHeight="226.0" prefWidth="199.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label fx:id="turnstileDirectionLabel" text="Directions:" />
+                                                                  <ListView fx:id="turnstileDirectionListView" fixedCellSize="30.0" prefHeight="112.0" prefWidth="133.0" />
+                                                               </children>
+                                                            </HBox>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="242.0" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="turnstileIntervalLabel" prefHeight="17.0" prefWidth="128.0" text="Interval (s):" />
+                                                                                        <Spinner fx:id="turnstileIntervalSpinner" prefHeight="25.0" prefWidth="200.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Button fx:id="saveTurnstileButton" cancelButton="true" mnemonicParsing="false" onAction="#saveAmenityAction" prefHeight="25.0" prefWidth="199.0" text="Save" />
+                                                                                        <Button fx:id="deleteTurnstileButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteAmenityAction" prefHeight="25.0" prefWidth="199.0" text="Delete" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <Button fx:id="addFloorFieldsTurnstileButton" cancelButton="true" mnemonicParsing="false" onAction="#addFloorFieldsAction" prefHeight="25.0" prefWidth="199.0" text="Add floor field" />
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                    </panes>
+                                                </Accordion>
+                                            </content>
+                                        </Tab>
+                                        <Tab text="Platform Amenities">
+                                            <content>
+                                                <Accordion>
+                                                    <panes>
+                                                        <TitledPane animated="false" text="Train boarding area">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <VBox alignment="TOP_CENTER" prefHeight="371.0" prefWidth="199.0" spacing="10.0">
+                                                                            <children>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="10.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <CheckBox fx:id="trainDoorEnableCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" selected="true" text="Enable train boarding area" wrapText="true" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="trainDoorDirectionLabel" text="Direction:" />
+                                                                                        <ChoiceBox fx:id="trainDoorDirectionChoiceBox" prefHeight="25.0" prefWidth="138.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label fx:id="trainDoorOrientationLabel" text="Orientation:" />
+                                                                  <ChoiceBox fx:id="trainDoorOrientationChoiceBox" prefHeight="25.0" prefWidth="127.0" />
+                                                               </children>
+                                                            </HBox>
+                                                                                <HBox alignment="CENTER" layoutX="10.0" layoutY="194.0" prefHeight="200.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="trainDoorCarriageLabel" prefHeight="7.0" prefWidth="53.0" text="Carriages:" wrapText="true" />
+                                                                                        <ListView fx:id="trainDoorCarriageListView" fixedCellSize="30.0" prefHeight="17.0" prefWidth="138.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                            <HBox alignment="CENTER" prefHeight="10.0" prefWidth="199.0" spacing="10.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="trainDoorFemalesOnlyCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="200.0" text="Females only" wrapText="true" />
+                                                               </children>
+                                                            </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Button fx:id="saveTrainDoorButton" cancelButton="true" mnemonicParsing="false" onAction="#saveAmenityAction" prefHeight="25.0" prefWidth="199.0" text="Save" />
+                                                                                        <Button fx:id="deleteTrainDoorButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteAmenityAction" prefHeight="25.0" prefWidth="199.0" text="Delete" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <Button fx:id="addFloorFieldsTrainDoorButton" cancelButton="true" mnemonicParsing="false" onAction="#addFloorFieldsAction" prefHeight="25.0" prefWidth="199.0" text="Add floor field" />
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                        <TitledPane animated="false" text="Train track">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <VBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0" spacing="10.0">
+                                                                            <children>
+                                                                                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="trackDirectionLabel" prefHeight="17.0" prefWidth="90.0" text="Direction:" />
+                                                                                        <ChoiceBox fx:id="trackDirectionChoiceBox" prefHeight="25.0" prefWidth="177.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Button fx:id="saveTrackButton" cancelButton="true" mnemonicParsing="false" onAction="#saveAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Save" />
+                                                                                        <Button fx:id="deleteTrackButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Delete" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                    </panes>
+                                                </Accordion>
+                                            </content>
+                                        </Tab>
+                                        <Tab text="Miscellaneous">
+                                            <content>
+                                                <Accordion>
+                                                    <panes>
+                                                        <TitledPane animated="false" text="Obstacle">
+                                                            <content>
+                                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0">
+                                                                    <children>
+                                                                        <VBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0" spacing="10.0">
+                                                                            <children>
+                                                                                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Label fx:id="wallTypeLabel" prefHeight="17.0" prefWidth="42.0" text="Type:" />
+                                                                                        <ChoiceBox fx:id="wallTypeChoiceBox" prefHeight="25.0" prefWidth="174.0" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="199.0" spacing="10.0">
+                                                                                    <children>
+                                                                                        <Button fx:id="saveWallButton" cancelButton="true" mnemonicParsing="false" onAction="#saveAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Save" />
+                                                                                        <Button fx:id="deleteWallButton" cancelButton="true" mnemonicParsing="false" onAction="#deleteAmenityAction" prefHeight="25.0" prefWidth="200.0" text="Delete" />
+                                                                                    </children>
+                                                                                </HBox>
+                                                                                <Button fx:id="flipWallButton" cancelButton="true" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#flipAction" prefHeight="25.0" prefWidth="199.0" text="Rotate obstacle" />
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </TitledPane>
+                                                    </panes>
+                                                </Accordion>
+                                            </content>
+                                        </Tab>
+                                    </tabs>
+                                </TabPane>
+                            </children>
+                            <padding>
+                                <Insets top="5.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Test">
+               <content>
+                  <VBox prefHeight="794.0" prefWidth="286.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" prefHeight="110.0" prefWidth="286.0" text="Simulation">
+                           <content>
+                              <VBox prefHeight="194.0" prefWidth="120.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="70.0" prefWidth="100.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Text fx:id="elapsedTimeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Elapsed time: 00:00:00 (0 s)" textAlignment="CENTER" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                             <children>
+                                                <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#playAction" prefHeight="25.0" prefWidth="230.0" text="Play" />
+                                                <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetAction" prefHeight="25.0" prefWidth="117.0" text="Reset" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                             <children>
+                                                <Label fx:id="simulationSpeedLabel" prefHeight="17.0" prefWidth="248.0" text="Simulation speed:" />
+                                                <Slider fx:id="simulationSpeedSlider" max="300.0" min="1.0" prefWidth="273.0" snapToTicks="true" value="1.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" collapsible="false" prefHeight="163.0" prefWidth="250.0" text="Passengers">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="248.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="70.0" prefWidth="230.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Text fx:id="passengerCountStationText" strokeType="OUTSIDE" strokeWidth="0.0" text="0 passengers in this station" textAlignment="CENTER" wrappingWidth="221.421875" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Text fx:id="passengerCountFloorText" strokeType="OUTSIDE" strokeWidth="0.0" text="0 passengers in this floor (%)" textAlignment="CENTER" wrappingWidth="204.421875" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="37.0" prefHeight="100.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" collapsible="false" prefHeight="600.0" prefWidth="250.0" text="Platform">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="230.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="70.0" prefWidth="230.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="282.0" spacing="10.0">
+                                             <children>
+                                                <Label fx:id="platformDirectionLabel" text="Direction:" />
+                                                <ChoiceBox fx:id="platformDirectionChoiceBox" prefHeight="25.0" prefWidth="165.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                             <children>
+                                                <Label fx:id="platformCarriagesLabel" text="Trainset:" />
+                                                <ChoiceBox fx:id="platformCarriagesChoiceBox" prefHeight="25.0" prefWidth="164.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0" spacing="10.0">
+                                             <children>
+                                                <ToggleButton fx:id="openTrainDoorsButton" mnemonicParsing="false" onAction="#toggleTrainDoorsAction" prefHeight="25.0" prefWidth="231.0" text="Open train doors" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </VBox>
+               </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </right>
+    <top>
+        <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#saveStationAction" text="Save this station" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveStationRunOnlyAction" text="Save this station as run-only" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadStationAction" text="Load a station" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Floor">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#addFloorAboveAction" text="Add floor above" />
+                        <MenuItem mnemonicParsing="false" onAction="#addFloorBelowAction" text="Add floor below" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteFloorAction" text="Delete current floor" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+</BorderPane>

@@ -1,0 +1,5 @@
+/.idea/
+/out/
+trainsim.iml
+
+/src/hibernate.cfg.xml

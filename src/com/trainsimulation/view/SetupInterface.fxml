@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity"
+          minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="440.0" vgap="20.0"
+          xmlns="http://javafx.com/javafx/8.0.171"
+          fx:controller="com.trainsimulation.controller.screen.SetupScreenController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="50.0" prefWidth="130.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="0.0" prefWidth="33.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+    <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation starting time"/>
+        <Text layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation ending time"
+              GridPane.rowIndex="1"/>
+        <JFXTimePicker fx:id="startTimePicker" GridPane.columnIndex="1"/>
+        <JFXTimePicker fx:id="endTimePicker" layoutX="277.0" layoutY="23.0" GridPane.columnIndex="1"
+                       GridPane.rowIndex="1"/>
+        <JFXButton fx:id="setupButton" buttonType="RAISED" onAction="#setupAction" prefHeight="25.0" prefWidth="170.0"
+                   ripplerFill="WHITE" style="-fx-background-color: #85756e;" text="Set up" textFill="WHITE"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </JFXButton>
+    </children>
+</GridPane>

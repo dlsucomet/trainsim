@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+            fx:controller="com.trainsimulation.controller.screen.EditTrainScreenController">
+    <center>
+        <JFXTabPane style="-fx-toggle-color: black;" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Route selection">
+                    <content>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                            <children>
+                                <Text fx:id="routeText" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="This train has already been directed to leave the system. It is now returning to the depot."
+                                      textAlignment="CENTER" wrappingWidth="541.064453125"/>
+                                <JFXListView fx:id="stationsList" prefHeight="250.0" prefWidth="580.0"/>
+                                <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                                    <buttons>
+                                        <JFXButton fx:id="selectAllButton" buttonType="RAISED"
+                                                   onAction="#selectAllAction" ripplerFill="WHITE"
+                                                   style="-fx-background-color: #85756e;" text="Select all"
+                                                   textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="12.0"/>
+                                            </font>
+                                        </JFXButton>
+                                        <JFXButton fx:id="clearAllButton" buttonType="RAISED" onAction="#clearAllAction"
+                                                   ripplerFill="WHITE" style="-fx-background-color: #85756e;"
+                                                   text="Clear all" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="12.0"/>
+                                            </font>
+                                        </JFXButton>
+                                    </buttons>
+                        </ButtonBar>
+                        <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                            <buttons>
+                                <JFXButton fx:id="applyChangesButton" buttonType="RAISED" onAction="#applyChangesAction"
+                                           ripplerFill="WHITE" style="-fx-background-color: #85756e;"
+                                           text="Apply changes" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0"/>
+                                    </font>
+                                </JFXButton>
+                            </buttons>
+                        </ButtonBar>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab text="Remove train">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+                      <children>
+                          <Text fx:id="removeText" strokeType="OUTSIDE" strokeWidth="0.0"
+                                text="This train has already been directed to leave the system. It is now returning to the depot."
+                                textAlignment="CENTER" wrappingWidth="541.064453125"/>
+                          <JFXButton fx:id="removeTrainButton" buttonType="RAISED" onAction="#removeTrainAction"
+                                     ripplerFill="WHITE" style="-fx-background-color: #85756e;"
+                                     text="Remove train from system" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="12.0"/>
+                              </font>
+                          </JFXButton>
+                      </children>
+                      <padding>
+                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                      </padding>
+                  </VBox>
+               </content>
+          </Tab>
+            </tabs>
+        </JFXTabPane>
+   </center>
+</BorderPane>
